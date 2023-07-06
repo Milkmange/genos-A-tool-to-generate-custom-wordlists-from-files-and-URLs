@@ -1,0 +1,61 @@
+# Genos
+
+Genos is a Python tool to generate a wordlists from files and URLs.
+
+
+## Author
+
+- [@saeed0x1](https://www.github.com/saeed0x1)
+
+
+## Installation
+
+```bash
+pip install -r requirements.txt
+```
+
+## Usage/Examples
+
+## Usage
+
+```shell
+python genos.py [--url URL] [--list LIST] [--file FILE] [-o {w,a}] [--nojs] [output_filename]
+```
+
+## Options
+```shell
+-h, --help: Show the help message and exit.
+--url URL: Give a single URL with a .js endpoint.
+--list LIST: Give a list of URLs (urls.txt).
+--file FILE: Give one or more files (comma separated).
+-o {w,a}: Output mode: 'w' (write) or 'a' (append).
+--nojs: Mention if the provided URLs are non-js URLs.
+```
+
+## Examples
+- Generate a wordlist from a single URL and save it in 'output.txt' using write mode:
+```shell
+python genos.py --url https://example.com/script.js -o w output.txt
+```
+- Generate a wordlist from a list of URLs stored in 'urls.txt' and append it to 'output.txt':
+```shell
+python genos.py --list urls.txt -o a output.txt
+```
+- Generate a wordlist from a single JS file and print it in the terminal:
+```shell
+python genos.py --file script.js
+```
+- Generate a wordlist from multiple files and print it in the terminal:
+```shell
+python genos.py --file script.js,script2.js,file.py
+```
+- Generate a wordlist from a non-js URL:
+```shell
+python genos.py --url https://example.com/main.css --nojs
+```
+- Generate wordlist from a list of non js urls
+```shell
+python genos.py --list urls.txt --nojs
+```
+
+Note ⚠ : If the given url or list contains non js urls use "--nojs" argument to avoid errors.
