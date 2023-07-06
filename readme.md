@@ -1,6 +1,6 @@
 # Genos 🤖
 
-Genos is a Python tool to generate a wordlists from files and URLs.
+Genos is a Python tool to generate custom wordlists from files and URLs.
 
 
 ### Installation 🚀
