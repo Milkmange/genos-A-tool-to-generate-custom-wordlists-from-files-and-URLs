@@ -1,28 +1,23 @@
-# Genos
+# Genos 🤖
 
-Genos is a Python tool to generate a wordlists from files and URLs.
-
-
-## Author
-
-- [@saeed0x1](https://www.github.com/saeed0x1)
+Genos is a Python tool to generate custom wordlists from files and URLs.
 
 
-## Installation
+### Installation 🚀
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Usage/Examples
+### Usage/Examples 🏌️‍♂️
 
-## Usage
+#### Usage 💻
 
 ```shell
 python genos.py [--url URL] [--list LIST] [--file FILE] [-o {w,a}] [--nojs] [output_filename]
 ```
 
-## Options
+### Options 🚦
 ```shell
 -h, --help: Show the help message and exit.
 --url URL: Give a single URL with a .js endpoint.
@@ -32,7 +27,7 @@ python genos.py [--url URL] [--list LIST] [--file FILE] [-o {w,a}] [--nojs] [out
 --nojs: Mention if the provided URLs are non-js URLs.
 ```
 
-## Examples
+### Examples 🏇
 - Generate a wordlist from a single URL and save it in 'output.txt' using write mode:
 ```shell
 python genos.py --url https://example.com/script.js -o w output.txt
@@ -59,3 +54,8 @@ python genos.py --list urls.txt --nojs
 ```
 
 Note ⚠ : If the given url or list contains non js urls use "--nojs" argument to avoid errors.
+
+### Author 👨‍💻
+
+- [@saeed0x1](https://www.github.com/saeed0x1)
+
