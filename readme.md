@@ -1,6 +1,6 @@
 # Genos 🤖
 
-Genos is a Python tool to generate custom wordlists from files and URLs. Custom wordlists are import during pentesting or bug bounty hunting and this tool can generate target specific wordlists that can be used for multiple purposes, such as forced browsing, parameter mining etc.
+Genos is a Python tool to generate custom wordlists from files and URLs. Custom wordlists are important during pentesting or bug bounty hunting and this tool can generate target specific wordlists that can be used for multiple purposes, such as forced browsing, parameter mining etc.
 
 
 ### Installation 🚀
