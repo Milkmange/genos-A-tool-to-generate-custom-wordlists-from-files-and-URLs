@@ -153,14 +153,14 @@ elif args.list and args.nojs:
                 else:
                     print('Bad URL: {}, please check your URL'.format(line))
     else:
-        print("{} file doesn't exist".format(args.list))
+        print("'{}' file doesn't exist".format(args.list))
 
 elif args.file:
-    if os.path.exists(args.file):
-        for f in args.file:
+    for f in args.file:
+        if os.path.exists(f):
             single_files(f)
-    else:
-        print("{} file doesn't exist".format(args.file))
+        else:
+            print("'{}' file doesn't exist".format(f))
 
 elif args.url:
     main(args.url)
@@ -173,6 +173,6 @@ elif args.list:
                 main(line.strip())
             # continue
     else:
-        print("{} file doesn't exist".format(args.list))
+        print("'{}' file doesn't exist".format(args.list))
 else:
     print(parser.format_help())
