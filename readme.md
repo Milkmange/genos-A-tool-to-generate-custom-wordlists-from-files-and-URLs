@@ -61,8 +61,6 @@ python genos.py --url https://example.com/main.css --nojs
 python genos.py --list urls.txt --nojs
 ```
 
-Note ⚠ : If the given url or list contains non js urls use "--nojs" argument to avoid errors.
-
 ### Author 👨‍💻
 
 - [@saeed0x1](https://www.github.com/saeed0x1)
