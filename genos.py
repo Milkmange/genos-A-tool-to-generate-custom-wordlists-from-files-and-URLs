@@ -52,6 +52,8 @@ parser.add_argument('--file',help="Give one or more files (comma separated)",req
 parser.add_argument('-o',choices=['w','a'],help="Output mode: 'w' (write) or 'a' (append)",required=False,type=str)
 parser.add_argument('output_filename', nargs="?",help="Name of the output file")
 parser.add_argument("--nojs", action="store_true", help="Mention if the provided URLs are non-js URLs")
+parser.add_argument("--no-num", dest="exnum", action="store_true", help="Set to exclude numbers from the wordlist")
+parser.add_argument("--min-len", dest="minlen", help="Set the minimum length of a word",required=False,type=int)
 
 
 args = parser.parse_args()
@@ -109,7 +111,6 @@ def single_files(f):
     with open(f, 'r') as openedfile:
         content = openedfile.read()
         words = get_words(content)
-            
         print("\n".join(words))
             
         if args.o:
@@ -122,9 +123,37 @@ def get_words(content: str):
     word_list = set()
     content = beautify(content)
     words = re.findall(r'\b\w+\b', content)
-    word_list.update(words)
+    
+    if args.exnum:
+        result = re.sub(r'\b\d+\b', '', " ".join(words))
 
+        # if minimum length is set
+        if args.minlen:
+            _result = length_check(result.split())
+            word_list.update(_result)
+            return word_list
+        
+        word_list.update(result.split())
+        return word_list
+
+    if args.minlen:
+        print(words)
+        _result = length_check(words)
+        word_list.update(_result)
+        return word_list
+    
+    word_list.update(words)
     return word_list
+
+
+def length_check(wordlist):
+    _wordlist = set(wordlist)
+
+    for word in _wordlist.copy():
+        if len(word) < args.minlen:
+            _wordlist.remove(word)
+    
+    return _wordlist
 
 
 # file output
