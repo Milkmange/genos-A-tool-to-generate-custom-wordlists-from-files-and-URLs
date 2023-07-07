@@ -25,12 +25,14 @@ python genos.py [--url URL] [--list LIST] [--file FILE] [-o {w,a}] [--nojs] [out
 
 ### Options 🚦
 ```shell
--h, --help: Show the help message and exit.
---url URL: Give a single URL with a .js endpoint.
---list LIST: Give a list of URLs (urls.txt).
---file FILE: Give one or more files (comma separated).
--o {w,a}: Output mode: 'w' (write) or 'a' (append).
---nojs: Mention if the provided URLs are non-js URLs.
+ -h, --help        show this help message and exit
+  --url URL         Give a single url with .js endpoint
+  --list LIST       Give a list of URLs (urls.txt)
+  --file FILE       Give one or more files (comma separated)
+  -o {w,a}          Output mode: 'w' (write) or 'a' (append)
+  --nojs            Mention if the provided URLs are non-js URLs
+  --no-num          Set to exclude numbers from the wordlist
+  --min-len MINLEN  Set the minimum length of a word
 ```
 
 ### Examples 🏇
