@@ -164,43 +164,35 @@ def outputfile(word,filename,mode):
         else:
             f.write(word)
 
+
 # using the arguments
-if args.url and args.nojs:
-    if is_valid_url(args.url):
-        send_req(args.url)
-    else:
-        print('Bad URL: {}, please check your URL'.format(args.url))
-
-elif args.list and args.nojs:
-    if os.path.exists(args.list):
-        with open(args.list, 'r') as urllist:
-            lines = urllist.readlines()
-            for line in lines:
-                line = line.strip()
-                if is_valid_url(line):
-                    send_req(line)
-                else:
-                    print('Bad URL: {}, please check your URL'.format(line))
-    else:
-        print("'{}' file doesn't exist".format(args.list))
-
-elif args.file:
+if args.file:
     for f in args.file:
         if os.path.exists(f):
             single_files(f)
         else:
             print("'{}' file doesn't exist".format(f))
-
 elif args.url:
-    main(args.url)
-
+    if args.nojs:
+        if is_valid_url(args.url):
+            send_req(args.url)
+        else:
+            print('Bad URL: {}, please check your URL'.format(args.url))
+    else:
+        main(args.url)
 elif args.list:
     if os.path.exists(args.list):
         with open(args.list, 'r') as urllist:
             lines = urllist.readlines()
             for line in lines:
-                main(line.strip())
-            # continue
+                line = line.strip()
+                if args.nojs:
+                    if is_valid_url(line):
+                        send_req(line)
+                    else:
+                        print('Bad URL: {}, please check your URL'.format(line))
+                else:
+                    main(line)
     else:
         print("'{}' file doesn't exist".format(args.list))
 else:
