@@ -83,7 +83,6 @@ def main(js_file):
         sys.exit(0)
         
 
-
 # sending request to the server
 def send_req(file):
     try:
@@ -144,27 +143,36 @@ if args.url and args.nojs:
         print('Bad URL: {}, please check your URL'.format(args.url))
 
 elif args.list and args.nojs:
-    with open(args.list, 'r') as urllist:
-        lines = urllist.readlines()
-        for line in lines:
-            line = line.strip()
-            if is_valid_url(line):
-                send_req(line)
-            else:
-                print('Bad URL: {}, please check your URL'.format(line))
+    if os.path.exists(args.list):
+        with open(args.list, 'r') as urllist:
+            lines = urllist.readlines()
+            for line in lines:
+                line = line.strip()
+                if is_valid_url(line):
+                    send_req(line)
+                else:
+                    print('Bad URL: {}, please check your URL'.format(line))
+    else:
+        print("{} file doesn't exist".format(args.list))
 
 elif args.file:
-    for f in args.file:
-        single_files(f)
+    if os.path.exists(args.file):
+        for f in args.file:
+            single_files(f)
+    else:
+        print("{} file doesn't exist".format(args.file))
 
 elif args.url:
     main(args.url)
 
 elif args.list:
-    with open(args.list, 'r') as urllist:
-        lines = urllist.readlines()
-        for line in lines:
-            main(line.strip())
+    if os.path.exists(args.list):
+        with open(args.list, 'r') as urllist:
+            lines = urllist.readlines()
+            for line in lines:
+                main(line.strip())
             # continue
+    else:
+        print("{} file doesn't exist".format(args.list))
 else:
     print(parser.format_help())
