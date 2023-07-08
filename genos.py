@@ -19,18 +19,17 @@ Example commands:
     python genos.py --url https://example.com/script.js -o w output.txt
     - Generates a wordlist from a single URL and saves it in 'output.txt' using write mode.
 
-    python genos.py --list urls.txt -o a output.txt
-    - Generates a wordlist from a list of URLs stored in 'urls.txt'
-    - Appends the generated wordlist to 'output.txt'.
-
     python genos.py --file script.js
     - Generates a wordlist from a single JS file and prints it in the terminal.
 
-    python genos.py --file script.js,script2.js,file.py
-    - Generates a wordlist from multiple files and prints it in the terminal.
-    
     python genos.py --url https://example.com/main.css --nojs
     - Generates a wordlist from a non-js URL
+
+    $ echo "http://example.com/main.js" | python genos.py --stdin
+    - Taking standard input
+
+    $ cat urls.txt | python genos.py --stdin
+    - The output of cat command will be the input of genos
 '''
 
 parser = argparse.ArgumentParser(
@@ -54,7 +53,7 @@ parser.add_argument('output_filename', nargs="?",help="Name of the output file")
 parser.add_argument("--nojs", action="store_true", help="Mention if the provided URLs are non-js URLs")
 parser.add_argument("--no-num", dest="exnum", action="store_true", help="Set to exclude numbers from the wordlist")
 parser.add_argument("--min-len", dest="minlen", help="Set the minimum length of a word",required=False,type=int)
-
+parser.add_argument("--stdin",dest="stdin",action="store_true",help="Take standard input",required=False)
 
 args = parser.parse_args()
 
@@ -81,7 +80,7 @@ def main(js_file):
     if is_valid_js_url(js_file):
         send_req(js_file)
     else:
-        print('Bad URL: {}, contains non js URL\nProvide "--nojs" argument to continue'.format(js_file))
+        print('Bad URL: {}, please check your URL !!\nProvide "--nojs" argument if it is non js URL'.format(js_file))
         sys.exit(0)
         
 
@@ -164,7 +163,6 @@ def outputfile(word,filename,mode):
         else:
             f.write(word)
 
-
 # using the arguments
 if args.file:
     for f in args.file:
@@ -195,5 +193,12 @@ elif args.list:
                     main(line)
     else:
         print("'{}' file doesn't exist".format(args.list))
+elif args.stdin:
+    for line in sys.stdin.readlines():
+        if args.nojs:
+            if is_valid_url(line.strip()):
+                send_req(line.strip())
+        else:
+            main(line.strip())
 else:
     print(parser.format_help())
