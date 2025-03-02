@@ -63,5 +63,5 @@ python genos.py --list urls.txt --nojs
 
 ### Author 👨‍💻
 
-- [@saeed0x1](https://www.github.com/saeed0x1)
+- [@Saeed0xf](https://www.github.com/saeed0xf)
 
